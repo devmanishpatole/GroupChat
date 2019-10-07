@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    style="@style/chat_row">
+
+    <TextView
+        android:id="@+id/userName"
+        style="@style/user_name"
+        tools:text="User Name" />
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/chat_message"
+        tools:text="My Name is Anthony" />
+
+    <RelativeLayout
+        android:id="@+id/imageHolder"
+        style="@style/SectionLayout"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/photo"
+            style="@style/WrapContentLayout"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_error_outline" />
+
+        <TextView
+            android:id="@+id/progress"
+            style="@style/WrapContentLayout"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:text="100%" />
+    </RelativeLayout>
+
+</LinearLayout>

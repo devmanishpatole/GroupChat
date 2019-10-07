@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Padding/Margin -->
+    <dimen name="padding_default_horizontal">16dp</dimen>
+    <dimen name="padding_default_vertical">16dp</dimen>
+    <dimen name="padding_default_left">16dp</dimen>
+    <dimen name="padding_default_right">16dp</dimen>
+    <dimen name="padding_default_top">16dp</dimen>
+    <dimen name="padding_default_bottom">16dp</dimen>
+    <dimen name="padding_internal">5dp</dimen>
+    <dimen name="padding_internal_bigger">10dp</dimen>
+    <dimen name="padding_internal_even_bigger">12dp</dimen>
+    <dimen name="padding_size_zero">0dp</dimen>
+
+    <dimen name="margin_default_horizontal">@dimen/padding_default_horizontal</dimen>
+    <dimen name="margin_default_vertical">@dimen/padding_default_vertical</dimen>
+    <dimen name="margin_default_left">@dimen/padding_default_left</dimen>
+    <dimen name="margin_default_right">@dimen/padding_default_right</dimen>
+    <dimen name="margin_default_top">@dimen/padding_default_top</dimen>
+    <dimen name="margin_default_bottom">@dimen/padding_default_bottom</dimen>
+    <dimen name="margin_internal">@dimen/padding_internal</dimen>
+    <dimen name="margin_internal_bigger">@dimen/padding_internal_bigger</dimen>
+
+
+    <dimen name="user_name_text_size">13sp</dimen>
+    <dimen name="chat_text_size">18sp</dimen>
+
+</resources>
