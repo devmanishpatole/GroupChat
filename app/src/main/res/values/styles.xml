@@ -27,6 +27,13 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="MatchParentPadded" parent="MatchParentLayout">
+        <item name="android:paddingTop">@dimen/padding_default_top</item>
+        <item name="android:paddingBottom">@dimen/padding_default_bottom</item>
+        <item name="android:paddingLeft">@dimen/padding_default_left</item>
+        <item name="android:paddingRight">@dimen/padding_default_right</item>
+    </style>
+
     <style name="chat_row" parent="SectionContainer">
         <item name="android:padding">@dimen/padding_internal_bigger</item>
         <item name="android:layout_margin">@dimen/padding_internal</item>
@@ -44,5 +51,16 @@
         <item name="android:textSize">@dimen/chat_text_size</item>
     </style>
 
+    <style name="chat_list" parent="MatchParentLayout">
+        <item name="divider">@android:color/transparent</item>
+        <item name="android:stackFromBottom">true</item>
+        <item name="android:transcriptMode">alwaysScroll</item>
+    </style>
+
+    <style name="chat_edit_text" parent="WrapContentLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:inputType">text</item>
+    </style>
 
 </resources>
