@@ -1,5 +1,6 @@
 package com.manish.patole.groupchat.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -13,7 +14,9 @@ class ChatViewModel : BaseViewModel(), ChildEventListener {
     private val databaseReference =
         FirebaseDatabase.getInstance().reference.child(Constant.MESSAGE)
     private var key: String = ""
-    val receivedChatMessage = MutableLiveData<ChatMessage>()
+    private val _receivedChatMessage = MutableLiveData<ChatMessage>()
+    val receivedChatMessage: LiveData<ChatMessage>
+        get() = _receivedChatMessage
 
     fun loadMessages() = databaseReference.addChildEventListener(this)
 
@@ -28,7 +31,7 @@ class ChatViewModel : BaseViewModel(), ChildEventListener {
     override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
         val chat = dataSnapshot.getValue(ChatMessage().javaClass)
         if (key != dataSnapshot.key) {
-            receivedChatMessage.value = chat
+            _receivedChatMessage.value = chat
         }
         key = dataSnapshot.key.toString()
     }
