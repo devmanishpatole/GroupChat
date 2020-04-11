@@ -1,5 +1,6 @@
 package com.manish.patole.groupchat.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.manish.patole.groupchat.base.BaseViewModel
@@ -7,11 +8,13 @@ import com.manish.patole.groupchat.base.BaseViewModel
 class AuthenticationViewModel : BaseViewModel() {
     private var fireBaseAuthListener: FirebaseAuth.AuthStateListener
     private val mFirebaseAuth = FirebaseAuth.getInstance()
-    val userAuthentication = MutableLiveData<Boolean>()
+    private val _userAuthentication = MutableLiveData<Boolean>()
+    val userAuthentication: LiveData<Boolean>
+        get() = _userAuthentication
 
     init {
         fireBaseAuthListener = FirebaseAuth.AuthStateListener { auth ->
-            userAuthentication.postValue(null != auth.currentUser)
+            _userAuthentication.postValue(null != auth.currentUser)
         }
     }
 
