@@ -35,19 +35,24 @@
     </style>
 
     <style name="chat_row" parent="SectionContainer">
-        <item name="android:padding">@dimen/padding_internal_bigger</item>
-        <item name="android:layout_margin">@dimen/padding_internal</item>
+        <item name="android:layout_marginStart">@dimen/padding_internal</item>
+        <item name="android:layout_marginEnd">@dimen/padding_internal</item>
+        <item name="android:layout_marginTop">@dimen/chat_row_top</item>
+        <item name="android:layout_marginBottom">@dimen/chat_row_bottom</item>
     </style>
 
     <style name="user_name" parent="WrapContentLayout">
-        <item name="android:padding">@dimen/padding_internal</item>
+        <item name="android:paddingStart">@dimen/padding_internal</item>
+        <item name="android:paddingEnd">@dimen/padding_internal</item>
+        <item name="android:paddingTop">@dimen/padding_internal</item>
+        <item name="android:layout_marginTop">@dimen/padding_internal</item>
         <item name="android:textSize">@dimen/user_name_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="chat_message" parent="WrapContentLayout">
         <item name="android:padding">@dimen/padding_internal_bigger</item>
-        <item name="android:layout_marginTop">@dimen/padding_internal</item>
+        <item name="android:layout_marginTop">@dimen/chat_message_top</item>
         <item name="android:textSize">@dimen/chat_text_size</item>
     </style>
 
@@ -58,7 +63,7 @@
     </style>
 
     <style name="chat_edit_text" parent="WrapContentLayout">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">@dimen/padding_size_zero</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:inputType">text</item>
     </style>

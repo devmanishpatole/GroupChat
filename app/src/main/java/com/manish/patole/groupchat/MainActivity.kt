@@ -13,8 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.manish.patole.groupchat.adapter.ChatAdapter
@@ -31,13 +30,16 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 1
+        private const val SCROLL_DELAY = 100L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        authModel = ViewModelProviders.of(this).get(AuthenticationViewModel::class.java)
-        chatModel = ViewModelProviders.of(this).get(ChatViewModel::class.java)
+        ViewModelProvider(this).apply {
+            authModel = get(AuthenticationViewModel::class.java)
+            chatModel = get(ChatViewModel::class.java)
+        }
         handleEditText()
         addObservers()
     }
@@ -46,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         authModel.userAuthentication.observe(this, Observer { authenticated ->
             if (authenticated) {
                 chatAdapter = ChatAdapter(FirebaseAuth.getInstance().currentUser?.displayName)
-                chatList.layoutManager = LinearLayoutManager(this)
                 chatList.adapter = chatAdapter
                 chatModel.loadMessages()
             } else {
@@ -57,7 +58,10 @@ class MainActivity : AppCompatActivity() {
         chatModel.receivedChatMessage.observe(this, Observer { chatMessage ->
             progressBar.visibility = View.GONE
             chatAdapter.addMessage(chatMessage)
-            chatList.smoothScrollToPosition(chatAdapter.itemCount)
+            chatList.postDelayed({
+                chatList.smoothScrollToPosition(chatAdapter.itemCount)
+            }, SCROLL_DELAY)
+
         })
 
         sendButton.setOnClickListener {
@@ -88,9 +92,11 @@ class MainActivity : AppCompatActivity() {
     private fun handleEditText() {
         messageEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                //No Implementation
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //No Implementation
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

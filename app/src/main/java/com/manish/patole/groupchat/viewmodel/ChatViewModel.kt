@@ -37,15 +37,19 @@ class ChatViewModel : BaseViewModel(), ChildEventListener {
     }
 
     override fun onCancelled(p0: DatabaseError) {
+        //No Implementation
     }
 
     override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+        //No Implementation
     }
 
     override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+        //No Implementation
     }
 
     override fun onChildRemoved(p0: DataSnapshot) {
+        //No Implementation
     }
 }
 
