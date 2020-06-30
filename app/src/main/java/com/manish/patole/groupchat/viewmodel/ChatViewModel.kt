@@ -1,55 +1,32 @@
 package com.manish.patole.groupchat.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.manish.patole.groupchat.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.manish.patole.groupchat.data.ChatMessage
-import com.manish.patole.groupchat.util.Constant
+import com.manish.patole.groupchat.repository.MessageRepository
+import com.manish.patole.groupchat.repository.factory.MessageRepositoryFactory
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
-class ChatViewModel : BaseViewModel(), ChildEventListener {
-    private val databaseReference =
-        FirebaseDatabase.getInstance().reference.child(Constant.MESSAGE)
-    private var key: String = ""
-    private val _receivedChatMessage = MutableLiveData<ChatMessage>()
+@ExperimentalCoroutinesApi
+class ChatViewModel : ViewModel() {
+    private val messageRepo: MessageRepository = MessageRepositoryFactory.getMessageRepository()
+
+    private val _receivedChatMessage = messageRepo.observerIncomingMessages().filter { chat ->
+        chat.text?.isNotBlank() == true
+    }.map { chat ->
+        ChatMessage(chat.name, chat.text, chat.photoUrl, true)
+    }.asLiveData()
+
     val receivedChatMessage: LiveData<ChatMessage>
         get() = _receivedChatMessage
 
-    fun loadMessages() = databaseReference.addChildEventListener(this)
+    fun loadMessages() = messageRepo.loadMessages()
 
-    fun unLoadMessages() = databaseReference.removeEventListener(this)
+    fun unLoadMessages() = messageRepo.unLoadMessages()
 
-    fun pushMessage(message: String) = databaseReference.push().setValue(
-        ChatMessage(
-            currentUser?.displayName ?: Constant.ANONYMOUS, message
-        )
-    )
-
-    override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-        val chat = dataSnapshot.getValue(ChatMessage().javaClass)
-        if (key != dataSnapshot.key) {
-            _receivedChatMessage.value = chat
-        }
-        key = dataSnapshot.key.toString()
-    }
-
-    override fun onCancelled(p0: DatabaseError) {
-        //No Implementation
-    }
-
-    override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-        //No Implementation
-    }
-
-    override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-        //No Implementation
-    }
-
-    override fun onChildRemoved(p0: DataSnapshot) {
-        //No Implementation
-    }
+    fun pushMessage(message: String) = messageRepo.pushMessage(message)
 }
 

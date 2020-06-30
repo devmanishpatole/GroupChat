@@ -11,3 +11,9 @@ data class ChatMessage(
     var photoUrl: String? = null,
     var shouldShowUserName: Boolean = true
 )
+
+data class Chat(
+    var name: String? = null,
+    var text: String? = null,
+    var photoUrl: String? = null
+)

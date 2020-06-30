@@ -21,7 +21,9 @@ import com.manish.patole.groupchat.util.Constant
 import com.manish.patole.groupchat.viewmodel.AuthenticationViewModel
 import com.manish.patole.groupchat.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private lateinit var authModel: AuthenticationViewModel

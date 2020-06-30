@@ -2,10 +2,10 @@ package com.manish.patole.groupchat.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.manish.patole.groupchat.base.BaseViewModel
 
-class AuthenticationViewModel : BaseViewModel() {
+class AuthenticationViewModel : ViewModel() {
     private var fireBaseAuthListener: FirebaseAuth.AuthStateListener
     private val mFirebaseAuth = FirebaseAuth.getInstance()
     private val _userAuthentication = MutableLiveData<Boolean>()
